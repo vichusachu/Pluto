@@ -226,7 +226,6 @@ object OverlayManager {
                                 setColor("shade_panel_fg_color", Color.BLACK) // with blur
                             }
                             // Notification scrim color A14+
-                            setColor("system_surface_dim_dark", Color.BLACK)
                             setColor(systemPaletteNames[3][11], Color.BLACK)
                             setColor(systemPaletteNames[4][11], Color.BLACK)
                         }
@@ -261,21 +260,26 @@ object OverlayManager {
 
             add(
                 FabricatedOverlayResource(
-                    FABRICATED_OVERLAY_NAME_SYSTEMUI,
-                    SYSTEMUI_PACKAGE
-                ).also { systemuiOverlay ->
-                    systemuiOverlay.apply {
-                        setBoolean("flag_monet", false)
+    FABRICATED_OVERLAY_NAME_SYSTEMUI,
+    SYSTEMUI_PACKAGE
+).also { systemuiOverlay ->
+    systemuiOverlay.apply {
 
-                        if (isDarkMode && pitchBlackTheme) {
-                            // QS top part color A16+
-                            setColor("shade_panel_base", Color.BLACK) // with blur
-                            setColor("shade_panel_fallback", Color.BLACK) // no blur
-                            // Notification scrim color A16+
-                            setColor("notification_scrim_base", Color.BLACK) // with blur
-                            setColor("notification_scrim_fallback", Color.BLACK) // no blur
-                        }
-                    }
+        // 🔴 Disable Monet completely
+        setBoolean("flag_monet", false)
+
+        // 🎨 Your custom notification background color
+        val customNotificationColor = Color.parseColor("#303030") 
+        // ↑ CHANGE THIS to any color you want
+
+        // Android 16 Notification Area
+        setColor("notification_scrim_base", customNotificationColor)
+        setColor("notification_scrim_fallback", customNotificationColor)
+
+        // Extra safety (some A16 builds use this)
+        setColor("notification_scrim_color", customNotificationColor)
+    }
+                }
                 }
             )
 
