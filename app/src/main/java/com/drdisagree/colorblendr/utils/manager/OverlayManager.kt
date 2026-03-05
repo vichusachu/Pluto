@@ -226,6 +226,7 @@ object OverlayManager {
                                 setColor("shade_panel_fg_color", Color.BLACK) // with blur
                             }
                             // Notification scrim color A14+
+                            setColor("system_surface_dim_dark", Color.parseColor("#0D1E27"))
                             setColor(systemPaletteNames[3][11], Color.BLACK)
                             setColor(systemPaletteNames[4][11], Color.BLACK)
                         }
@@ -265,12 +266,6 @@ object OverlayManager {
                 ).also { systemuiOverlay ->
                     systemuiOverlay.apply {
                         setBoolean("flag_monet", false)
-                       val customNotificationColor = Color.parseColor("#05160F") // your color
-
-                            setColor("notification_scrim_base", customNotificationColor)
-                            setColor("notification_scrim_fallback", customNotificationColor)
-
-
                         if (isDarkMode && pitchBlackTheme) {
                             // QS top part color A16+
                             setColor("shade_panel_base", Color.BLACK) // with blur
