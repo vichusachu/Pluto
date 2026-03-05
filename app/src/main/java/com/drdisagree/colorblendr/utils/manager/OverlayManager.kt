@@ -260,26 +260,26 @@ object OverlayManager {
 
             add(
                 FabricatedOverlayResource(
-    FABRICATED_OVERLAY_NAME_SYSTEMUI,
-    SYSTEMUI_PACKAGE
-).also { systemuiOverlay ->
-    systemuiOverlay.apply {
+                    FABRICATED_OVERLAY_NAME_SYSTEMUI,
+                    SYSTEMUI_PACKAGE
+                ).also { systemuiOverlay ->
+                    systemuiOverlay.apply {
+                        setBoolean("flag_monet", false)
+                       val customNotificationColor = Color.parseColor("#05160F") // your color
 
-        // 🔴 Disable Monet completely
-        setBoolean("flag_monet", false)
+                            setColor("notification_scrim_base", customNotificationColor)
+                            setColor("notification_scrim_fallback", customNotificationColor)
 
-        // 🎨 Your custom notification background color
-        val customNotificationColor = Color.parseColor("#303030") 
-        // ↑ CHANGE THIS to any color you want
 
-        // Android 16 Notification Area
-        setColor("notification_scrim_base", customNotificationColor)
-        setColor("notification_scrim_fallback", customNotificationColor)
-
-        // Extra safety (some A16 builds use this)
-        setColor("notification_scrim_color", customNotificationColor)
-    }
-                }
+                        if (isDarkMode && pitchBlackTheme) {
+                            // QS top part color A16+
+                            setColor("shade_panel_base", Color.BLACK) // with blur
+                            setColor("shade_panel_fallback", Color.BLACK) // no blur
+                            // Notification scrim color A16+
+                            setColor("notification_scrim_base", Color.BLACK) // with blur
+                            setColor("notification_scrim_fallback", Color.BLACK) // no blur
+                        }
+                    }
                 }
             )
 
